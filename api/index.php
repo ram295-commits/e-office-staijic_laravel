@@ -50,8 +50,13 @@ if (isset($_ENV['VERCEL']) || isset($_SERVER['VERCEL'])) {
         }
     }
 
-    // Point Laravel's storage_path() to /tmp via the APP_STORAGE_PATH environment variable.
-    // This is consumed in bootstrap/app.php via useStoragePath().
+    // Point Laravel's storage_path() to /tmp via LARAVEL_STORAGE_PATH.
+    // Laravel 11 checks this env var natively in Application::storagePath().
+    // bootstrap/app.php also reads it for the Vercel path redirect.
+    $_ENV['LARAVEL_STORAGE_PATH']    = $tmpStorage;
+    $_SERVER['LARAVEL_STORAGE_PATH'] = $tmpStorage;
+
+    // Keep APP_STORAGE_PATH for backward compat with bootstrap/app.php fallback.
     $_ENV['APP_STORAGE_PATH']    = $tmpStorage;
     $_SERVER['APP_STORAGE_PATH'] = $tmpStorage;
 }

@@ -30,21 +30,14 @@ $storagePath = $isVercel
 if ($isVercel) {
     $_ENV['LOG_CHANNEL']    = $_ENV['LOG_CHANNEL']    ?? 'stderr';
     $_SERVER['LOG_CHANNEL'] = $_SERVER['LOG_CHANNEL'] ?? 'stderr';
+
+    // Laravel 11 natively checks LARAVEL_STORAGE_PATH in Application::storagePath().
+    // Setting it here is sufficient; no useStoragePath() call needed.
+    $_ENV['LARAVEL_STORAGE_PATH']    = $storagePath;
+    $_SERVER['LARAVEL_STORAGE_PATH'] = $storagePath;
 }
 
 return Application::configure(basePath: dirname(__DIR__))
-    /*
-    |--------------------------------------------------------------------------
-    | Redirect storage_path() to /tmp on Vercel
-    |--------------------------------------------------------------------------
-    |
-    | useStoragePath() tells the Application instance to use our /tmp-based
-    | path for ALL storage_path() calls inside Laravel (views, sessions,
-    | cache, logs). This must be called before withRouting() so that service
-    | providers that read storage_path() during boot get the correct value.
-    |
-    */
-    ->useStoragePath($storagePath)
     ->withRouting(
         web: __DIR__.'/../routes/web.php',
         commands: __DIR__.'/../routes/console.php',

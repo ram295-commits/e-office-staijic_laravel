@@ -9,29 +9,6 @@
     }
   },
 
-  "build": {
-    "env": {
-      "VERCEL": "1"
-    }
-  },
-
-  "builds": [
-    {
-      "src": "api/index.php",
-      "use": "vercel-php@0.7.3",
-      "config": {
-        "maxDuration": 30
-      }
-    },
-    {
-      "src": "package.json",
-      "use": "@vercel/node",
-      "config": {
-        "buildCommand": "npm install && npm run build"
-      }
-    }
-  ],
-
   "routes": [
     {
       "src": "/build/(.*)",
@@ -45,7 +22,5 @@
       "src": "/(.*)",
       "dest": "/api/index.php"
     }
-  ],
-
-  "outputDirectory": "public"
+  ]
 }
