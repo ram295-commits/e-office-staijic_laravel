@@ -81,4 +81,11 @@ chdir($laravelRoot);
 // ─── 4. Delegate to Laravel's public/index.php ───────────────────────────────
 // This is functionally identical to what a standard web server (Nginx/Apache)
 // does: it points the document root at /public and invokes index.php.
-require $laravelRoot . '/public/index.php';
+try {
+    require $laravelRoot . '/public/index.php';
+} catch (\Throwable $e) {
+    // Catch the real exception before the Exception Handler tries to use 'view'
+    echo "<h1>CRITICAL BOOT ERROR</h1>";
+    echo "<pre>" . (string) $e . "</pre>";
+    exit(1);
+}
