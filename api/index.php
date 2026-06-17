@@ -59,6 +59,18 @@ if (isset($_ENV['VERCEL']) || isset($_SERVER['VERCEL'])) {
     // Keep APP_STORAGE_PATH for backward compat with bootstrap/app.php fallback.
     $_ENV['APP_STORAGE_PATH']    = $tmpStorage;
     $_SERVER['APP_STORAGE_PATH'] = $tmpStorage;
+
+    // Override bootstrap cache paths so Laravel doesn't try to write to read-only bootstrap/cache
+    $_ENV['APP_SERVICES_CACHE'] = '/tmp/services.php';
+    $_SERVER['APP_SERVICES_CACHE'] = '/tmp/services.php';
+    $_ENV['APP_PACKAGES_CACHE'] = '/tmp/packages.php';
+    $_SERVER['APP_PACKAGES_CACHE'] = '/tmp/packages.php';
+    $_ENV['APP_CONFIG_CACHE'] = '/tmp/config.php';
+    $_SERVER['APP_CONFIG_CACHE'] = '/tmp/config.php';
+    $_ENV['APP_ROUTES_CACHE'] = '/tmp/routes-v7.php';
+    $_SERVER['APP_ROUTES_CACHE'] = '/tmp/routes-v7.php';
+    $_ENV['APP_EVENTS_CACHE'] = '/tmp/events.php';
+    $_SERVER['APP_EVENTS_CACHE'] = '/tmp/events.php';
 }
 
 // ─── 3. Fix the working directory ────────────────────────────────────────────
