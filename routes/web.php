@@ -135,4 +135,10 @@ Route::middleware(['auth', 'check.active'])->group(function () {
         }
         return app(\App\Http\Controllers\NumberReservationController::class)->fillSlot($request, $reservationId, $mailId);
     })->name('reservations.fill-slot');
+
+    // Android UI/UX Simulator
+    Route::get('/android-ui', function() {
+        return view('android-ui');
+    })->name('android-ui');
 });
+
