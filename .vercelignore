@@ -1,0 +1,49 @@
+# === DEPENDENCIES ===
+# Vercel installs Composer deps via the PHP runtime automatically.
+# node_modules are excluded because Vercel re-installs them during build.
+/vendor
+/node_modules
+
+# === ENVIRONMENT FILES ===
+# Never deploy .env — configure secrets in Vercel Dashboard > Environment Variables
+.env
+.env.backup
+.env.production
+
+# === TESTS ===
+/tests
+/.phpunit.cache
+phpunit.xml
+.phpunit.result.cache
+
+# === LOCAL DEV TOOLS ===
+/Homestead.json
+/Homestead.yaml
+/.vagrant
+
+# === IDE / EDITOR FILES ===
+/.idea
+/.vscode
+/.nova
+/.zed
+/.fleet
+/.editorconfig
+
+# === STORAGE (runtime-generated, must use /tmp on Vercel) ===
+# Keep the directory scaffolding (tracked via .gitkeep) but not runtime files.
+/storage/logs/*.log
+/storage/framework/cache/data/*
+/storage/framework/sessions/*
+/storage/framework/views/*
+/storage/app/public/*
+
+# === LARGE BINARY ASSETS (not needed at runtime) ===
+*.rar
+*.zip
+Zip/
+Zip.rar
+Logo_STAIJIC.png
+
+# === MISC ===
+fix_routes.php
+README.md
