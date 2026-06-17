@@ -53,13 +53,11 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->trustProxies(at: '*');
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        // If we are on Vercel, dump the raw exception to prevent the "view" binding error
+        // Force dump the raw exception to prevent the "view" binding error
         // from masking the real underlying error during early boot crashes.
-        if (isset($_ENV['VERCEL']) || isset($_SERVER['VERCEL'])) {
-            $exceptions->render(function (\Throwable $e, \Illuminate\Http\Request $request) {
-                echo "<h1>Vercel Real Error Dump</h1>";
-                echo "<pre>" . (string) $e . "</pre>";
-                exit(1);
-            });
-        }
+        $exceptions->render(function (\Throwable $e, \Illuminate\Http\Request $request) {
+            echo "<h1>Vercel Real Error Dump</h1>";
+            echo "<pre>" . (string) $e . "</pre>";
+            exit(1);
+        });
     })->create();
