@@ -96,13 +96,6 @@
                 Tata Arsip & SOP
             </a>
 
-            <div class="px-3 mb-2 mt-6 text-[10px] font-bold uppercase tracking-widest text-gray-400">Mobile App</div>
-            
-            <a href="{{ route('android-ui') }}" class="flex items-center gap-3 px-3 py-2 rounded-md transition-colors font-medium text-sm {{ request()->routeIs('android-ui') ? 'bg-green-50 text-primary border-l-4 border-secondary' : 'text-gray-600 hover:bg-gray-50 hover:text-primary' }}">
-                <i class="ph ph-device-mobile text-lg {{ request()->routeIs('android-ui') ? 'text-secondary' : 'text-gray-400' }}"></i> 
-                Android UI/UX View
-            </a>
-
 
             @if(auth()->check() && (auth()->user()->isAdmin() || auth()->user()->isManager()))
             <div class="px-3 mb-2 mt-6 text-[10px] font-bold uppercase tracking-widest text-gray-400">Administrasi Sistem</div>

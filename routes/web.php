@@ -108,10 +108,16 @@ Route::middleware(['auth', 'check.active'])->group(function () {
         // D. Master Data
         Route::group([], function () {
             Route::resource('units', \App\Http\Controllers\Administrasi\UnitController::class)->except('show');
+
+            // Export & Import — must be declared BEFORE resource() to avoid route-model binding conflict
+            Route::get('document-types/export', [\App\Http\Controllers\Administrasi\DocumentTypeController::class, 'export'])->name('document-types.export');
+            Route::post('document-types/import', [\App\Http\Controllers\Administrasi\DocumentTypeController::class, 'import'])->name('document-types.import');
+
             Route::resource('document-types', \App\Http\Controllers\Administrasi\DocumentTypeController::class)->except('show')->parameters([
                 'document-types' => 'documentType'
             ]);
         });
+
     });
 
     // ── Number Reservations ──────────────────────────────────────────────────
